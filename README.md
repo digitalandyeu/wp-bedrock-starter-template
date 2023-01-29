@@ -1,3 +1,29 @@
+# wp-bedrock-starter-template
+
+## Pre-requirements
+
+```bash
+wp package install aaemnnosttv/wp-cli-login-command
+wp package install aaemnnosttv/wp-cli-dotenv-command
+wp login install --activate
+```
+
+To use `wp-update:users` scripts, which imports users from a CSV file, you need the `wp_users.csv` to be presented at  `~/.digitalandy_secrets/`;
+set `SECRETS_FOLDER` environment variable relocate to a different folder.
+
+```bash
+ln -s ~/Documents/@da/.gighub-private/.secrets ~/.digitalandy_secrets && ls -lsa ~/.digitalandy_secrets
+```
+
+The users CSV file should have the following format:
+
+```csv
+ID,user_login,display_name,user_email,user_registered,roles,user_pass
+1,root,root,digitalandyeu+spam@gmail.com,2022-11-08 13:44:08,administrator,root
+```
+
+---
+
 <p align="center">
   <a href="https://roots.io/bedrock/">
     <img alt="Bedrock" src="https://cdn.roots.io/app/uploads/logo-bedrock.svg" height="100">

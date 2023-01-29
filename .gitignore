@@ -3,10 +3,12 @@ web/app/plugins/*
 !web/app/plugins/.gitkeep
 web/app/mu-plugins/*/
 web/app/themes/twentytwentythree/
-web/app/upgrade
+web/app/upgrade/*
+!web/app/upgrade/.gitkeep
 web/app/uploads/*
 !web/app/uploads/.gitkeep
 web/app/cache/*
+web/app/languages
 
 # WordPress
 web/wp
@@ -28,3 +30,11 @@ wp-cli.local.yml
 
 .idea
 DS_Store
+
+# Protected dotenvs
+.private
+
+.export/db_dump*.sql
+!.export/db_safe_*
+!.export/wp_users__example.csv
+.export/.gitkeep
