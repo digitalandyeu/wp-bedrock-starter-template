@@ -95,74 +95,22 @@
     "wordpress-install-dir": "web/wp"
   },
   "scripts": {
-    "wp-new:database": [
-      "wp db create"
-    ],
-    "wp-new:core": [
-      "source .env && wp core install --url=$STG_WP_HOME --skip-email"
-    ],
-    "wp-new:langs": [
-      "wp language core install uk en_GB cs_CZ",
-      "wp language plugin install --all uk en_GB cs_CZ"
-    ],
-    "wp-new:options": [
-      "wp site switch-language cs_CZ",
-      "wp rewrite structure '/%category%/%postname%/'",
-      "wp option update timezone_string Europe/Prague",
-      "wp option update date_format 'F j, Y'",
-      "wp option update time_format 'H:i'",
-      "wp option update default_comment_status closed",
-      "wp option update default_ping_status closed",
-      "wp option update default_pingback_flag 0",
-      "wp option update show_comments_cookies_opt_in 0",
-      "wp option update link_manager_enabled 0",
-      "wp option update close_comments_for_old_posts 1",
-      "wp option update use_smilies 0",
-      "wp option update show_avatars 0",
-      "wp cache flush"
-    ],
-    "wp-new:jetpack": [
-      "wp jetpack module activate photon-cdn",
-      "wp jetpack module activate markdown",
-      "wp jetpack module activate verification-tools",
-      "wp jetpack module activate sitemaps",
-      "wp jetpack module activate shortcodes"
-    ],
     "wp-new:users": [
       "source .env && [ -f $SECRETS_FOLDER/wp_users.csv ] && wp user import-csv $SECRETS_FOLDER/wp_users.csv"
-    ],
-    "wp-new": [
-      "composer run-script wp-new:database",
-      "composer run-script wp-new:core",
-      "composer run-script wp-new:users",
-      "composer run-script wp-new:langs",
-      "composer run-script wp-new:options",
-      "composer run-script wp-new::jetpack",
-      "wp theme activate twentytwentythree",
-      "wp media import web/app/uploads/2023/01/*",
-      "wp plugin activate --all",
-      "wp media regenerate --yes"
     ],
     "db:import": "wp db import .export/db.sql",
     "db:export": "wp db export .export/db.sql --add-drop-table",
     "db:dump-prod": "wp db export .export/db_prod_\"`date +\"%Y-%m-%d__%H%\":\"%M\":\"%S\"`\".sql --add-drop-table",
     "db:dump-safe": "wp db export .export/db_safe_export_\"`date +\"%Y-%m-%d__%H%\":\"%M\":\"%S\"`\".sql --exclude_tables=wp_users,wp_options,wp_comments",
-    "dev:cook": [
-      "source .env && wp search-replace $STG_WP_HOME $DEV_WP_HOME",
-      "composer run-script wp-new:langs",
-      "composer run-script cleanup"
-    ],
     "cleanup": [
       "wp language plugin update --all",
       "wp language core update",
       "wp cache flush",
       "wp transient delete --all"
     ],
-    "stg:cook": [
-      "source .env && wp search-replace $DEV_WP_HOME $STG_WP_HOME"
-    ],
     "post-root-package-install": [
-      "[ -f .env ] || ln -s .env.example .env"
+      "[ -f .env ] || ln -s .env.example .env",
+      ". .utils/install.sh"
     ]
   }
 }
