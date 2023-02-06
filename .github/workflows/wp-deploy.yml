@@ -43,6 +43,9 @@ jobs:
 
     - name: Install Composer's dependencies
       run: composer install --prefer-dist --no-progress --no-scripts --no-dev --no-interaction --no-ansi --optimize-autoloader
+
+    - name: Install wp stuff
+      run: wp login install --activate && wp language core install cs_CZ uk en_GB && wp language plugin install --all cs_CZ uk en_GB && wp language theme install --all cs_CZ uk en_GB
       
     - name: Install SSH Key
       uses: shimataro/ssh-key-action@v2.5.0
