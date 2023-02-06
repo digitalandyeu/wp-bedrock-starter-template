@@ -17,6 +17,11 @@ wp dotenv set SECRETS_FOLDER ~/.yourpath --raw
 
 #### Links
 - https://github.com/postlight/headless-wp-starter
+- https://wpengine.com/builders/using-composer-manage-plugins-deploy/
+- https://www.smashingmagazine.com/2015/09/wordpress-management-with-wp-cli/
+- FaustWP
+- https://www.wordpressify.co
+- https://frontity.org
 
 ---
 
