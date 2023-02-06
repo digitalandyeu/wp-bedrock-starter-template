@@ -1,27 +1,24 @@
-# wp-bedrock-starter-template
+# WP Bedrock Starter
 
-## Pre-requirements
+[![WP Deploy](https://github.com/digitalandyeu/wp-bedrock-starter-template/actions/workflows/wp-deploy.yml/badge.svg?branch=main)](https://github.com/digitalandyeu/wp-bedrock-starter-template/actions/workflows/wp-deploy.yml)
+[![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
+[![GitPod](https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/digitalandyeu/wp-bedrock-starter-template)
 
-```bash
-wp package install aaemnnosttv/wp-cli-login-command
-wp package install aaemnnosttv/wp-cli-dotenv-command
-```
-
-To use `wp-update:users` scripts, which imports users from a CSV file, you need the `wp_users.csv` to be presented at  `~/.digitalandy_secrets/`;
-set `SECRETS_FOLDER` environment variable relocate to a different folder.
+## Pre-requirements & Secrets
 
 ```bash
-ln -s ~/Documents/@da/.gighub-private/.secrets ~/.digitalandy_secrets && ls -lsa ~/.digitalandy_secrets
+
+# Link secrets folder with wp_users.csv file
+ln -s ~/Documents/@da/.gighub-private/.secrets ~/.digitalandy_secrets
+
+# or config your own path
+wp dotenv set SECRETS_FOLDER ~/.yourpath --raw
 ```
 
-The users CSV file should have the following format:
+<details>
+<summary>Roots Bedrock original readme</summary>
+<p>
 
-```csv
-ID,user_login,display_name,user_email,user_registered,roles,user_pass
-1,root,root,digitalandyeu+spam@gmail.com,2022-11-08 13:44:08,administrator,root
-```
-
----
 
 <p align="center">
   <a href="https://roots.io/bedrock/">
@@ -128,3 +125,7 @@ Keep track of development and community news.
 - Follow [@rootswp on Twitter](https://twitter.com/rootswp)
 - Read and subscribe to the [Roots Blog](https://roots.io/blog/)
 - Subscribe to the [Roots Newsletter](https://roots.io/subscribe/)
+
+
+</p>
+</details>
