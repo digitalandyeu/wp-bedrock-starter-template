@@ -54,7 +54,7 @@ jobs:
       run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> /home/runner/.ssh/known_hosts
 
     - name: Deploy with rsync
-      run: rsync -a ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ env.REMOTE_PATH }} --exclude-from='.distignore' --dry-run
-      
+      run: rsync -av --delete --dry-run ./ digit3481@193.160.119.180:wp.digitalandy.eu --exclude-from='.distignore' --backup-dir='~/rsync-backups'
+
     - name: Continue install on a Server
       run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd ${{ env.REMOTE_PATH }} && ls -lsa'

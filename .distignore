@@ -1,6 +1,4 @@
 .*
-composer.*
 *.md
 *.log
-.env
-.export
+web/app/languages
