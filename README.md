@@ -5,7 +5,6 @@
 ```bash
 wp package install aaemnnosttv/wp-cli-login-command
 wp package install aaemnnosttv/wp-cli-dotenv-command
-wp login install --activate
 ```
 
 To use `wp-update:users` scripts, which imports users from a CSV file, you need the `wp_users.csv` to be presented at  `~/.digitalandy_secrets/`;

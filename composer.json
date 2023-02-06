@@ -64,7 +64,8 @@
     "wpackagist-plugin/acf-to-rest-api": "^3.3",
     "wpackagist-plugin/jetpack": "^11.7",
     "advanced-custom-fields/advanced-custom-fields-pro": "^6.0",
-    "wpackagist-plugin/acf-extended": "^0.8.9"
+    "wpackagist-plugin/acf-extended": "^0.8.9",
+    "wpackagist-plugin/faustwp": "^0.8.1"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest"
@@ -102,15 +103,9 @@
     "db:export": "wp db export .export/db.sql --add-drop-table",
     "db:dump-prod": "wp db export .export/db_prod_\"`date +\"%Y-%m-%d__%H%\":\"%M\":\"%S\"`\".sql --add-drop-table",
     "db:dump-safe": "wp db export .export/db_safe_export_\"`date +\"%Y-%m-%d__%H%\":\"%M\":\"%S\"`\".sql --exclude_tables=wp_users,wp_options,wp_comments",
-    "cleanup": [
-      "wp language plugin update --all",
-      "wp language core update",
-      "wp cache flush",
-      "wp transient delete --all"
-    ],
     "post-root-package-install": [
-      "[ -f .env ] || ln -s .env.example .env",
       ". .utils/install.sh"
-    ]
+    ],
+    "login": "wp login as root"
   }
 }

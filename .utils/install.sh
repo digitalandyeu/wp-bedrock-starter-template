@@ -1,42 +1,9 @@
 #bin/bash
+[ -f .env ] || ln -s .env.example "$PWD"/.env
 source .utils/env.sh
 
+# If all is installed exit
+wp core is-installed || pill && exit 0
+
 # First install
-wp db check --quiet || wp db create
-wp core is-installed || wp core install --url="$STG_URL" --skip-email --title="WP" --admin_user="root" --admin_password="root" --admin_email="spam@digitalandy.eu"
-
-# Install languages
-for lang in "${LANGS[@]}"; do
-    wp language core is-installed "$lang" || wp language core install "$lang"
-    wp language plugin install --all "$lang"
-    wp language theme install --all "$lang"
-done
-
-wp theme activate twentytwentythree
-wp plugin activate --all
-
-wp site switch-language cs_CZ
-wp rewrite structure '/%category%/%postname%/'
-wp option update timezone_string Europe/Prague
-wp option update date_format 'F j, Y'
-wp option update time_format 'H:i'
-wp option update default_comment_status closed
-wp option update default_ping_status closed
-wp option update default_pingback_flag 0
-wp option update show_comments_cookies_opt_in 0
-wp option update link_manager_enabled 0
-wp option update close_comments_for_old_posts 1
-wp option update use_smilies 0
-wp option update show_avatars 0
-
-wp jetpack module activate photon-cdn
-wp jetpack module activate markdown
-wp jetpack module activate verification-tools
-wp jetpack module activate sitemaps
-
-# Install the users
-# [ -f $SECRETS_FOLDER/wp_users.csv ] && wp user import-csv $SECRETS_FOLDER/wp_users.csv
-
-wp media regenerate --yes
-wp cache flush
-wp transient delete --all
+. .utils/install-default.sh
