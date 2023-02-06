@@ -4,7 +4,7 @@
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 [![GitPod](https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/digitalandyeu/wp-bedrock-starter-template)
 
-## Pre-requirements & Secrets
+## Secrets
 
 ```bash
 
@@ -14,6 +14,11 @@ ln -s ~/Documents/@da/.gighub-private/.secrets ~/.digitalandy_secrets
 # or config your own path
 wp dotenv set SECRETS_FOLDER ~/.yourpath --raw
 ```
+
+#### Links
+- https://github.com/postlight/headless-wp-starter
+
+---
 
 <details>
 <summary>Roots Bedrock original readme</summary>
