@@ -1,10 +1,3 @@
 path: web/wp
 server:
   docroot: web
-
-# Subcommand defaults (e.g. `wp config create`)
-
-# Aliases to other WordPress installs (e.g. `wp @staging rewrite flush`)
-# An alias can include 'user', 'url', 'path', 'ssh', or 'http'
-#@staging:
-#   ssh: ssh user@193.160.119.180:~/wp.digitalandy.eu -i ~/.ssh/id_rsa

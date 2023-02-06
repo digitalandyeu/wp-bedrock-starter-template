@@ -37,3 +37,6 @@ DS_Store
 !.export/wp_users__example.csv
 .export/.gitkeep
 .export/**/*.zip
+
+db/index.php
+db/.htaccess

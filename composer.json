@@ -65,7 +65,8 @@
     "wpackagist-plugin/acf-extended": "^0.8.9",
     "ext-pdo": "*",
     "ext-sqlite3": "*",
-    "wpackagist-plugin/wp-importer": "^1.6"
+    "wpackagist-plugin/wp-importer": "^1.6",
+    "ext-json": "*"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest"
