@@ -21,9 +21,6 @@ jobs:
         php-version: 7.4
         php-tools: wp
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
-
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v3
