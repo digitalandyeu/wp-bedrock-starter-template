@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  PHP_VERSION: 7.4
+  PHP_TOOLS: wp
+  WP_ENV: 'staging'
+  REMOTE_PATH: 'wp.digitalandy.eu'
+
 permissions:
   contents: read
 
@@ -14,12 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    
     - name: Setup PHP Action
       uses: shivammathur/setup-php@2.24.0
       with:
-        php-version: 7.4
-        tools: wp
+        php-version: ${{ env.PHP_VERSION }}
+        tools: ${{ env.PHP_TOOLS }}
 
     - name: Cache Composer packages
       id: composer-cache
@@ -34,7 +39,7 @@ jobs:
       run: wp package install aaemnnosttv/wp-cli-dotenv-command
 
     - name: wp dotenv create .env
-      run: wp dotenv init --file=.env --with-salts --template=.env.staging && wp dotenv set ACF_PRO_KEY ${{ secrets.ACF_PRO_KEY }}
+      run: wp dotenv init --file=.env --with-salts --template=.env.${{ env.WP_ENV }} && wp dotenv set ACF_PRO_KEY ${{ secrets.ACF_PRO_KEY }}
 
     - name: Install Composer's dependencies
       run: composer install --prefer-dist --no-progress --no-scripts --no-dev --no-interaction --no-ansi --optimize-autoloader
@@ -49,7 +54,7 @@ jobs:
       run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> /home/runner/.ssh/known_hosts
 
     - name: Deploy with rsync
-      run: rsync -a --delete ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ env.REMOTE_PATH }} --exclude-from='.distignore' --dry-run
+      run: rsync -a ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ env.REMOTE_PATH }} --exclude-from='.distignore' --dry-run
       
     - name: Continue install on a Server
       run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd ${{ env.REMOTE_PATH }} && wp --info'
