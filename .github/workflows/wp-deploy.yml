@@ -30,6 +30,12 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-php-
 
+    - name: wp-cli
+      run: wp package install aaemnnosttv/wp-cli-dotenv-command
+
+    - name: wp dotenv
+      run: wp dotenv init --file=.env --with-salts --template=.env.staging && wp dotenv set ACF_PRO_KEY ${{ secrets.ACF_PRO_KEY }}
+
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-scripts --no-dev --no-interaction --no-ansi --optimize-autoloader
       
