@@ -19,7 +19,7 @@ jobs:
       uses: shivammathur/setup-php@2.24.0
       with:
         php-version: 7.4
-        php-tools: wp
+        tools: wp
 
     - name: Cache Composer packages
       id: composer-cache
@@ -30,17 +30,14 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-php-
 
-    - name: wp-cli
+    - name: wp-cli config
       run: wp package install aaemnnosttv/wp-cli-dotenv-command
 
-    - name: wp dotenv
+    - name: wp dotenv create .env
       run: wp dotenv init --file=.env --with-salts --template=.env.staging && wp dotenv set ACF_PRO_KEY ${{ secrets.ACF_PRO_KEY }}
 
-    - name: Install dependencies
+    - name: Install Composer's dependencies
       run: composer install --prefer-dist --no-progress --no-scripts --no-dev --no-interaction --no-ansi --optimize-autoloader
-      
-    - name: Create the .env
-      run: touch .env && echo ${{ secrets.SSH_USER }} > .env
       
     - name: Install SSH Key
       uses: shimataro/ssh-key-action@v2.5.0
@@ -48,7 +45,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
     
-    - name: Adding Known Hosts
+    - name: Add SSH Key to known Hosts
       run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> /home/runner/.ssh/known_hosts
 
     - name: Deploy with rsync
