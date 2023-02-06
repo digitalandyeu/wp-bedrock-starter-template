@@ -4,7 +4,7 @@ wp db create
 wp core install --url="$STG_URL" --skip-email --title="WP" --admin_user="root" --admin_password="root" --admin_email="spam@digitalandy.eu"
 
 wp language core install cs_CZ uk en_GB
-language plugin install --all cs_CZ uk en_GB
+wp language plugin install --all cs_CZ uk en_GB
 wp language theme install --all cs_CZ uk en_GB
 
 wp theme activate twentytwentythree

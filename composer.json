@@ -98,14 +98,35 @@
   },
   "scripts": {
     "wp-new:users": [
-      "source .env && [ -f $SECRETS_FOLDER/wp_users.csv ] && wp user import-csv $SECRETS_FOLDER/wp_users.csv"
+      "source ./.env && [ -f $SECRETS_FOLDER/wp_users.csv ] && wp user import-csv $SECRETS_FOLDER/wp_users.csv"
     ],
     "db:import": "wp db import .export/db.sql",
     "db:export": "wp db export .export/db.sql --add-drop-table",
     "db:dump-prod": "wp db export .export/db_prod_\"`date +\"%Y-%m-%d__%H%\":\"%M\":\"%S\"`\".sql --add-drop-table",
+    "backup:zip": "zip -r .export/bckp_prod_\"`date +\"%Y-%m-%d__%H%\":\"%M\":\"%S\"`\".zip ./ -x ./vendor/\\* ./.git/\\* ./.export/\\* ./web/wp/\\* ./.idea/\\* .DS_Store ./web/app/languages/\\* ./web/app/upgrade/\\* ./web/app/plugins/\\* ./web/app/mu-plugins/\\* ./.github/\\* -v .DS_Store",
     "db:dump-safe": "wp db export .export/db_safe_export_\"`date +\"%Y-%m-%d__%H%\":\"%M\":\"%S\"`\".sql --exclude_tables=wp_users,wp_options,wp_comments",
     "post-root-package-install": [
       ". .utils/install.sh"
+    ],
+    "users:show": "source ./.env && [ -f $SECRETS_FOLDER/wp_users.csv ] && cat $SECRETS_FOLDER/wp_users.csv",
+    "before-deploy": [
+      "composer run-script db:export",
+      "composer run-script backup:zip"
+    ],
+    "post-deploy": [
+      "composer run-script db:import",
+      "composer run-script db:dump-prod",
+      "composer run-script wp-new:users",
+      "wp search-replace 'https://wp.digitalandy.devs' 'https://wp.digitalandy.eu' --skip-columns=guid",
+      "wp search-replace 'http://wp.digitalandy.devs' 'https://wp.digitalandy.eu' --skip-columns=guid",
+      "wp language core install cs_CZ uk en_GB",
+      "wp language plugin install --all cs_CZ uk en_GB",
+      "wp language theme install --all cs_CZ uk en_GB",
+      "wp media regenerate --yes --only-missing --skip-delete",
+      "wp db optimize",
+      "wp cache flush",
+      "wp rewrite flush",
+      "wp transient delete --all"
     ],
     "root-root": "wp user update root --user_pass=root --skip-email",
     "login": "wp login as root"
