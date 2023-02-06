@@ -31,7 +31,7 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-scritpts -q --no-ansi --no-interaction --no-scripts
+      run: composer install --prefer-dist --no-progress --no-scripts --no-dev --no-interaction --no-ansi --optimize-autoloader
       
     - name: Create the .env
       run: touch .env && echo ${{ secrets.SSH_USER }} > .env
