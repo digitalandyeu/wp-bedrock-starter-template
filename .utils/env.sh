@@ -9,6 +9,7 @@ function pill()
 {
   wp language core update
   wp language plugin update --all
+  wp language theme update --all
   wp media regenerate --yes --only-missing --skip-delete
   wp cache flush
   wp transient delete --all

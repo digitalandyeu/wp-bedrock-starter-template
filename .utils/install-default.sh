@@ -7,7 +7,7 @@ wp language core install cs_CZ uk en_GB
 wp language plugin install --all cs_CZ uk en_GB
 wp language theme install --all cs_CZ uk en_GB
 
-wp theme activate twentytwentythree
+wp theme activate theme
 wp plugin activate --all
 
 wp site switch-language cs_CZ
@@ -23,10 +23,11 @@ wp option update link_manager_enabled 0
 wp option update close_comments_for_old_posts 1
 wp option update use_smilies 0
 wp option update show_avatars 0
+wp option update uploads_use_yearmonth_folders 0
 
-wp jetpack module activate photon-cdn
 wp jetpack module activate markdown
 wp jetpack module activate verification-tools
 wp jetpack module activate sitemaps
+wp jetpack module activate copy-post
 
 wp login install --activate

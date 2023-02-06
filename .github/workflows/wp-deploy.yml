@@ -41,6 +41,9 @@ jobs:
     - name: wp dotenv create .env
       run: wp dotenv init --file=.env --with-salts --template=.env.${{ env.WP_ENV }} && wp dotenv set ACF_PRO_KEY ${{ secrets.ACF_PRO_KEY }}
 
+    - name: switch to sqlite
+      run: wp config set USE_MYSQL false --raw
+
     - name: Install Composer's dependencies
       run: composer install --prefer-dist --no-progress --no-scripts --no-dev --no-interaction --no-ansi --optimize-autoloader
 

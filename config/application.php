@@ -93,6 +93,10 @@ Config::define('SECURE_AUTH_SALT', env('SECURE_AUTH_SALT'));
 Config::define('LOGGED_IN_SALT', env('LOGGED_IN_SALT'));
 Config::define('NONCE_SALT', env('NONCE_SALT'));
 
+Config::define('USE_MYSQL', env('USE_MYSQL') ?: false);
+Config::define('DB_DIR', env('DB_DIR') ?: $root_dir . '/db/');
+Config::define('DB_FILE', 'db.sqlite');
+
 /**
  * Custom Settings
  */
