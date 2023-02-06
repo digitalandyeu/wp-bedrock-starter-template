@@ -1,4 +1,4 @@
-name: WP PHP Build & Deploy
+name: WP Deploy
 
 on:
   push:
