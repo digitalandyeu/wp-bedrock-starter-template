@@ -1,0 +1,55 @@
+name: WP PHP Build & Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup PHP Action
+      uses: shivammathur/setup-php@2.24.0
+      with:
+        php-version: 7.4
+        php-tools: wp
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-scritpts -q --no-ansi --no-interaction --no-scripts
+      
+    - name: Create the .env
+      run: touch .env && echo ${{ secrets.SSH_USER }} > .env
+      
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2.5.0
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+    
+    - name: Adding Known Hosts
+      run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> /home/runner/.ssh/known_hosts
+
+    - name: Deploy with rsync
+      run: rsync -a --delete ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ env.REMOTE_PATH }} --exclude-from='.distignore' --dry-run
+      
+    - name: Continue install on a Server
+      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd ${{ env.REMOTE_PATH }} && wp --info'
