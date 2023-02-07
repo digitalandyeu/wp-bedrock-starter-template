@@ -8,7 +8,7 @@ class ContentTypes
     {
         add_action('init', array($this, 'register_post_types'));
         add_action('init', array($this, 'register_taxonomies'));
-        add_action('init', function (){
+        add_action('init', function () {
             add_post_type_support('page', 'excerpt');
 //            remove_post_type_support('page', 'editor');
             register_taxonomy_for_object_type('post_tag', 'page');
@@ -34,18 +34,12 @@ class ContentTypes
      */
     public function parse_request($query)
     {
-
         if (!$query->is_main_query() || 2 != count($query->query) || !isset($query->query['page'])) {
-
             return;
-
         }
 
         if (!empty($query->query['name'])) {
-
             $query->set('post_type', ['post', 'page']);
-
         }
-
     }
 }

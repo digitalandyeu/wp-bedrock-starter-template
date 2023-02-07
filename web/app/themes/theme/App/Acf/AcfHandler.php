@@ -10,7 +10,6 @@ namespace Theme\Acf;
  */
 class AcfHandler
 {
-
     /**
      * Hook the methods into WordPress actions here.
      *
@@ -23,12 +22,10 @@ class AcfHandler
         });
 
         if (class_exists('ACFE_AutoSync')) {
-
             add_filter('acf/load_field_group', function ($field_group) {
                 $field_group['acfe_autosync'] = ['json','php'];
                 return $field_group;
             });
-
         }
 
         add_action('acfe/init', function () {
@@ -36,7 +33,5 @@ class AcfHandler
                 acf_update_setting('acfe/dev', true);
             }
         });
-
     }
-
 }

@@ -10,7 +10,6 @@ namespace Theme\Acf;
  */
 class Blocks
 {
-
     /**
      * Hook the methods into WordPress actions here.
      *
@@ -28,7 +27,6 @@ class Blocks
      */
     public function register_blocks()
     {
-
 //        acf_register_block_type(array(
 //            'name' => 'acf/hero',
 //            'title' => 'Hero',
@@ -61,12 +59,11 @@ class Blocks
 //                'jsx' => true,
 //            ),
 //        ));
-
     }
 }
 
-function acf_block_render_callback( $block ) {
-
+function acf_block_render_callback($block)
+{
     ob_start();
     json_encode($block);
     $block = ob_get_clean();
@@ -77,5 +74,4 @@ function acf_block_render_callback( $block ) {
     fclose($myfile);
 
     return 1;
-
 }

@@ -13,7 +13,7 @@
 
 add_filter('show_admin_bar', '__return_false');
 
-add_filter( 'jetpack_implode_frontend_css', '__return_false', 99 );
+add_filter('jetpack_implode_frontend_css', '__return_false', 99);
 
 add_filter('body_class', function ($classes) {
     $classes_unset = ['wp-embed-responsive', 'status-published'];
@@ -27,7 +27,6 @@ add_filter('body_class', function ($classes) {
 });
 
 add_action('template_redirect', function () {
-
     $resp = [
         'config' => get_fields('options_settings_config'),
         'nav' => [

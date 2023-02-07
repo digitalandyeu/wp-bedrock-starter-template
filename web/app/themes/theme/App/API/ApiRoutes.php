@@ -30,6 +30,4 @@ class ApiRoutes
             'Contact.submit'
         );
     }
-
-
 }
