@@ -14,7 +14,6 @@ use Theme\Theme\ThemeBlocks;
  */
 class ThemeInit
 {
-
     /**
      * Load the theme's required code
      * and enqueues any related assets.
@@ -23,8 +22,6 @@ class ThemeInit
      */
     public function bootstrap()
     {
-
-
         new ThemeConfig();
 
         new ContentTypes();
@@ -75,5 +72,4 @@ class ThemeInit
         new Acf\Blocks();
         new Acf\AcfHandler();
     }
-
 }

@@ -12,7 +12,6 @@ use Theme\Helpers\MailTemplate;
  */
 class Contact
 {
-
     /**
      * Holds the API arguments.
      *
@@ -34,9 +33,7 @@ class Contact
      */
     public function __construct()
     {
-
         $this->args = array();
-
     }
 
     /**
@@ -46,9 +43,7 @@ class Contact
      */
     public function get_arguments(): array
     {
-
         return $this->args;
-
     }
 
     /**
@@ -58,9 +53,7 @@ class Contact
      */
     public function get_permissions(): bool
     {
-
         return true;
-
     }
 
     /**
@@ -71,7 +64,6 @@ class Contact
      */
     public function submit(Request $request): Response
     {
-
         $v = new Validator($request->get_params());
 
         // Validation data
@@ -81,14 +73,12 @@ class Contact
 
         // Don't proceed if fields are not valid
         if (!$v->validate()) {
-
             $res_data = array(
                 'message' => 'There are errors with your form submission!',
                 'errors' => $v->errors()
             );
 
             return new Response($res_data, 400);
-
         }
 
         $to = getenv('WP_ENV') === 'production' ? get_field('contact', 'option')['email'] : 'development@think3.co.uk';
@@ -118,13 +108,11 @@ class Contact
 
         // Don't proceed if email didn't send successfully
         if (!$email_sent) {
-
             $res_data = [
                 'message' => 'Failed to dispatch email!'
             ];
 
             return new Response($res_data, 500);
-
         }
 
         // Success message
@@ -133,7 +121,5 @@ class Contact
         ];
 
         return new Response($res_data);
-
     }
-
 }

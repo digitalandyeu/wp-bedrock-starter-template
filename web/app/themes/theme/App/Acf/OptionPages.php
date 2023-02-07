@@ -10,7 +10,6 @@ namespace Theme\Acf;
  */
 class OptionPages
 {
-
     public array $option_pages = [
         [
             'slug' => 'config',
@@ -47,9 +46,7 @@ class OptionPages
      */
     public function register_option_page($slug, $title, $_args = [])
     {
-
         if (function_exists('acf_add_options_page')) {
-
             $slug = 'options_' . $slug;
 
             $args = [
@@ -59,9 +56,6 @@ class OptionPages
             ];
 
             acf_add_options_page(array_merge($args, $_args));
-
         }
-
     }
-
 }

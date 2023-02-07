@@ -63,7 +63,6 @@ class ThemeConfig
             //'nice-search', // Redirect /?s=query to /search/query
             'relative-urls', // Convert absolute URLs to relative URLs
         ]);
-
     }
 
     public function getStarterContent(): array
