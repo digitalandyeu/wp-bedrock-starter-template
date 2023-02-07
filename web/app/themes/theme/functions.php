@@ -1,80 +1,19 @@
 <?php
 
+/**
+ * Registers all of the theme's back-end functionality.
+ */
+
+/**
+ * Bootstrap the theme's PHP code and
+ * load all related classes.
+ */
+(new Theme\ThemeInit())->bootstrap();
+
+
 add_filter('show_admin_bar', '__return_false');
 
-add_filter('init', function () {
-    remove_action('generate_header', 'generate_construct_header');
-    add_post_type_support('page', 'excerpt');
-    remove_post_type_support('page', 'editor');
-});
-
-add_action('after_setup_theme', function () {
-    add_theme_support('menus');
-    remove_theme_support('wp-block-styles');
-    add_theme_support('disable-custom-font-sizes');
-    add_theme_support('disable-custom-colors');
-    add_theme_support('disable-custom-gradients');
-    add_theme_support('disable-layout-styles');
-    remove_theme_support('core-block-patterns');
-    remove_theme_support('block-template-parts');
-
-    add_theme_support('editor-color-palette', []);
-    add_theme_support('editor-gradient-presets', []);
-    add_theme_support('disable-appearance-tools');
-    remove_theme_support('appearance-tools');
-
-    add_theme_support('editor-font-sizes', [
-        [
-            'name' => 'small',
-            'size' => 12,
-            'slug' => 'small'
-        ],
-        [
-            'name' => 'normal',
-            'size' => 16,
-            'slug' => 'regular'
-        ]
-    ]);
-});
-
-add_action('acf/init', function () {
-
-    acf_add_options_page([
-        'menu_slug' => 'page_settings',
-        'page_title' => 'Page settings',
-        'active' => true,
-        'capability' => 'edit_posts',
-        'parent_slug' => '/edit.php?post_type=page',
-        'position' => 100,
-        'redirect' => true,
-        'post_id' => 'options_settings_page',
-        'autoload' => false,
-    ]);
-
-    acf_add_options_page(array(
-        'menu_slug' => 'post_settings',
-        'page_title' => 'Posts settings',
-        'active' => true,
-        'capability' => 'edit_posts',
-        'parent_slug' => '/edit.php',
-        'position' => 100,
-        'redirect' => true,
-        'post_id' => 'options_settings_post',
-        'autoload' => false,
-    ));
-
-    acf_add_options_page(array(
-        'menu_slug' => 'options_config',
-        'page_title' => 'Configurations',
-        'active' => true,
-        'capability' => 'edit_posts',
-        'position' => 100,
-        'redirect' => true,
-        'post_id' => 'options_settings_config',
-        'autoload' => false,
-    ));
-
-});
+add_filter( 'jetpack_implode_frontend_css', '__return_false', 99 );
 
 add_filter('body_class', function ($classes) {
     $classes_unset = ['wp-embed-responsive', 'status-published'];
@@ -102,8 +41,8 @@ add_action('template_redirect', function () {
             'template' => get_page_template_slug() ?: 'default'
         ],
         'seo' => [
-            'title' => html_entity_decode (wp_strip_all_tags(get_the_title())),
-            'description' => html_entity_decode( wp_strip_all_tags(get_the_excerpt()) ?: wp_strip_all_tags(get_bloginfo('description')) ),
+            'title' => html_entity_decode(wp_strip_all_tags(get_the_title())),
+            'description' => html_entity_decode(wp_strip_all_tags(get_the_excerpt()) ?: wp_strip_all_tags(get_bloginfo('description'))),
             'json-ld' => '',
             'og-image' => get_the_post_thumbnail_url() ?: get_template_directory_uri() . '/assets/images/og-image.jpg',
             'head' => [

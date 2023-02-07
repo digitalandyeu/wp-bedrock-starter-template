@@ -67,14 +67,22 @@
     "ext-sqlite3": "*",
     "ext-json": "*",
     "wpackagist-plugin/svg-support": "^2.5",
-    "wpackagist-plugin/wordpress-importer": "^0.8.0"
+    "wpackagist-plugin/wordpress-importer": "^0.8.0",
+    "vlucas/valitron": "^1.4",
+    "roots/soil": "^4.1"
   },
   "require-dev": {
-    "roave/security-advisories": "dev-latest"
+    "roave/security-advisories": "dev-latest",
+    "wp-cli/wp-cli": "^2.7"
   },
   "suggest": {
     "wpackagist-plugin/faustwp": "*",
     "wpackagist-plugin/redirection": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Theme\\": "web/app/themes/theme/App"
+    }
   },
   "config": {
     "optimize-autoloader": true,
