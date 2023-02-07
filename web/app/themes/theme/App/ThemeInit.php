@@ -3,9 +3,10 @@
 namespace Theme;
 
 use Theme\Acf;
-use Theme\Classes\PostTypes;
-use Theme\Classes\ThemeConfig;
-use Theme\Theme\Blocks;
+use Theme\CMS\AdminArea;
+use Theme\CMS\ContentTypes;
+use Theme\Theme\ThemeConfig;
+use Theme\Theme\ThemeBlocks;
 
 /**
  * The theme, as loaded and represented
@@ -23,11 +24,13 @@ class ThemeInit
     public function bootstrap()
     {
 
-        // new Assetloader();
-        // new PostTypes();
-        // new ThemeConfig();
 
-        new Blocks([
+        new ThemeConfig();
+
+        new ContentTypes();
+        new AdminArea();
+
+        new ThemeBlocks([
             'core/paragraph',
             'core/heading',
             'core/image',
@@ -70,6 +73,7 @@ class ThemeInit
         ]);
 
         new Acf\Blocks();
+        new Acf\AcfHandler();
     }
 
 }

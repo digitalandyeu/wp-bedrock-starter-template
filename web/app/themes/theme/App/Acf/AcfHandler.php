@@ -22,18 +22,20 @@ class AcfHandler
             remove_filter('acf_the_content', 'wpautop');
         });
 
-        if (function_exists('acfe_')) {
+        if (class_exists('ACFE_AutoSync')) {
+
+            add_filter('acf/load_field_group', function ($field_group) {
+                $field_group['acfe_autosync'] = ['json','php'];
+                return $field_group;
+            });
 
         }
 
-//        add_action('acfe/init', function () {
-//            acf_update_setting('acfe/modules/single_meta', true);
-//        });
-
-//        add_filter('acf/load_field_group', function ($field_group) {
-//            $field_group['acfe_autosync'] = ['json','php'];
-//            return $field_group;
-//        });
+        add_action('acfe/init', function () {
+            if (WP_DEBUG && WP_ENV === 'development') {
+                acf_update_setting('acfe/dev', true);
+            }
+        });
 
     }
 

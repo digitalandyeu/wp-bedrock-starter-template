@@ -68,7 +68,8 @@
     "ext-json": "*",
     "wpackagist-plugin/svg-support": "^2.5",
     "wpackagist-plugin/wordpress-importer": "^0.8.0",
-    "vlucas/valitron": "^1.4"
+    "vlucas/valitron": "^1.4",
+    "roots/soil": "^4.1"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",

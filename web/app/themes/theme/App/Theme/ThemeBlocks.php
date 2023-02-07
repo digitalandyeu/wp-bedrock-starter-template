@@ -3,7 +3,7 @@
 namespace Theme\Theme;
 
 
-class Blocks {
+class ThemeBlocks {
 
     public array $allowed_blocks = [];
 
