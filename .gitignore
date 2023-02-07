@@ -40,3 +40,5 @@ DS_Store
 
 db/index.php
 db/.htaccess
+
+web/app/themes/wprecommended
