@@ -15,14 +15,6 @@ class OptionPages
         [
             'slug' => 'config',
             'title' => 'Config'
-        ],
-        [
-            'slug' => 'post',
-            'title' => 'Posts Settings',
-            'args' => [
-                'parent_slug' => 'edit.php',
-                'position' => 100
-            ]
         ]
     ];
 

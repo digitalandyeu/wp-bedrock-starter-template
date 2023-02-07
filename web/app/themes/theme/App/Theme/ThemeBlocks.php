@@ -12,7 +12,7 @@ class ThemeBlocks {
 
         $this->allowed_blocks = $allowed_blocks;
 
-        add_filter( 'allowed_block_types_all', [$this, 'allow_blocks'], 10, 2 );
+        // add_filter( 'allowed_block_types_all', [$this, 'allow_blocks'], 10, 2 );
 
     }
 
